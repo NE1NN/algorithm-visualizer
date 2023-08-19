@@ -1,10 +1,17 @@
 import Node from './Node/Node';
+import { useState, useEffect } from 'react';
 
 import './PathfindingVisualizer.css'
  
 export default function PathfindingVisualizer() {
   const rows = 50;
   const cols = 20;
+
+  // 2D array to keep track of visited nodes
+  const [visitedNodes, setVisitedNodes] = useState(Array(rows).fill().map(() => Array(cols).fill(false)));
+
+  // State to track the current node being visited
+  const [currentNode, setCurrentNode] = useState(null);
 
 
   return (
