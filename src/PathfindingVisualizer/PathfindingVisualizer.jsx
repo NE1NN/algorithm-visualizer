@@ -3,9 +3,8 @@ import Node from './Node/Node';
 import './PathfindingVisualizer.css'
  
 export default function PathfindingVisualizer() {
-  // const nodes = [1, 2, 3, 4];
-  const rows = 10;
-  const cols = 10;
+  const rows = 30;
+  const cols = 20;
 
 
   return (
