@@ -31,6 +31,7 @@ export function dfs(grid, startNode, endNode, setGrid, delay) {
     const path = [];
     let currentNode = endNode;
     while (currentNode.previousNode) {
+      currentNode.isPath = true;
       path.unshift(currentNode);
       currentNode = currentNode.previousNode;
     }
