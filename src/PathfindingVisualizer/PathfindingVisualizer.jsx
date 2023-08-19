@@ -19,7 +19,7 @@ export default function PathfindingVisualizer() {
       for (let col = 0; col < cols; col++) {
         const isStart = row === startNode[0] && col === startNode[1];
         const isEnd = row === endNode[0] && col === endNode[1];
-        currentRow.push({row, col, isStart, isEnd, isVisited: false});
+        currentRow.push({row, col, isStart, isEnd, isVisited: false, isPath: false});
       }
       initialGrid.push(currentRow);
     }
@@ -27,7 +27,7 @@ export default function PathfindingVisualizer() {
   })
 
   function handleClick() {
-    dfs(grid, startNode, setGrid)
+    dfs(grid, startNode, endNode, setGrid)
   }
 
   return (
@@ -36,7 +36,7 @@ export default function PathfindingVisualizer() {
       {grid.map((row, rowIndex) => (
         <div className='row' key={rowIndex}>
         {row.map(node => (
-          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited}/>
+          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited} isPath={node.isPath}/>
         ))}
       </div>
       ))}
