@@ -2,19 +2,13 @@ import Node from './Node/Node';
 import { useState, useEffect } from 'react';
 
 import './PathfindingVisualizer.css'
+
+export const rows = 50;
+export const cols = 20;
  
 export default function PathfindingVisualizer() {
-  const rows = 50;
-  const cols = 20;
-
   const startNode = [3, 6];
   const endNode = [28, 6];
-
-  // 2D array to keep track of visited nodes
-  const [visitedNodes, setVisitedNodes] = useState(Array(rows).fill().map(() => Array(cols).fill(false)));
-
-  // State to track the current node being visited
-  const [currentNode, setCurrentNode] = useState(null);
 
   // Creates initial grid
   const [grid, setGrid] = useState(() => {
@@ -30,7 +24,6 @@ export default function PathfindingVisualizer() {
     }
     return initialGrid;
   })
-
 
   return (
     // Creates a grid
