@@ -1,5 +1,6 @@
 import Node from './Node/Node';
 import { useState, useEffect } from 'react';
+import { dfs } from '../Algorithms/dfs';
 
 import './PathfindingVisualizer.css'
 
@@ -25,16 +26,21 @@ export default function PathfindingVisualizer() {
     return initialGrid;
   })
 
+  function handleClick() {
+    dfs(grid, startNode, setGrid)
+  }
+
   return (
     // Creates a grid
     <div className='grid'>
       {grid.map((row, rowIndex) => (
         <div className='row' key={rowIndex}>
         {row.map(node => (
-          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd}/>
+          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited}/>
         ))}
       </div>
       ))}
+      <button onClick={handleClick}>Start</button>
     </div>
   );
 }
