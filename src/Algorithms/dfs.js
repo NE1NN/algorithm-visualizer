@@ -21,23 +21,29 @@ export function dfs(grid, startNode, endNode, setGrid, delay) {
     setGrid([...grid]);
     if (node === grid[endNode[0]][endNode[1]]) {
       clearInterval(intervalId);
-      const path = getPath(grid[endNode[0]][endNode[1]]);
+      const path = getPath(grid[endNode[0]][endNode[1]], delay);
       setGrid([...grid]);
       return path;
     }
   }, delay);
 
-  function getPath(endNode) {
+  function getPath(endNode, delay) {
     const path = [];
     let currentNode = endNode;
-    while (currentNode.previousNode) {
-      currentNode.isPath = true;
-      path.unshift(currentNode);
-      currentNode = currentNode.previousNode;
-    }
-    path.unshift(currentNode);
+    const intervalId = setInterval(() => {
+      if (currentNode.previousNode) {
+        currentNode.isPath = true;
+        path.unshift(currentNode);
+        currentNode = currentNode.previousNode;
+      } else {
+        path.unshift(currentNode);
+        clearInterval(intervalId);
+      }
+      setGrid([...grid]);
+    }, delay);
     return path;
   }
+  
 }
 
 function getNeighbors(grid, node) {
