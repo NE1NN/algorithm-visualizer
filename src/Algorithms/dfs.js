@@ -1,7 +1,7 @@
 import {rows, cols} from '../PathfindingVisualizer/PathfindingVisualizer';
 
 export function dfs(grid, startNode, setGrid) {
-  const stack = [grid[startNode[0][startNode]]];
+  const stack = [grid[startNode[0]][startNode[1]]];
   while (stack.length > 0) {
     const node = stack.pop();
     if (!node.isVisited) {
