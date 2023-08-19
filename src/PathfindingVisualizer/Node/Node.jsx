@@ -7,10 +7,10 @@ export default function Node(props) {
     className = "node start";
   } else if (isEnd) {
     className = "node end";
+  } else if (isPath) {
+      className = "node path"
   } else if (isVisited) {
     className = "node visited";
-  } else if (isPath) {
-    className = "node path"
   }
 
   return <div className={className}></div>;
