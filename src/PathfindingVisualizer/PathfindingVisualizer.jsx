@@ -20,13 +20,9 @@ export default function PathfindingVisualizer() {
       {[...Array(rows)].map((_, rowIndex) => (
         <div className='row' key={rowIndex}>
         {[...Array(cols)].map((_, colIndex) => {
-          let position = '';
-          if (rowIndex === 3 && colIndex === 6) {
-            position = 'start';
-          } else if (rowIndex === 28 && colIndex === 6) {
-            position = 'end';
-          }
-          return <Node key={`${rowIndex}-${colIndex}`} position={position}/>
+          const isStart = rowIndex === 3 && colIndex === 6
+          const isEnd = rowIndex === 28 && colIndex === 6
+          return <Node key={`${rowIndex}-${colIndex}`} isStart={isStart} isEnd={isEnd}/>
         })}
       </div>
       ))}

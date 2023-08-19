@@ -1,6 +1,8 @@
 import './Node.css';
 
 export default function Node(props) {
-  const {position} = props;
-  return <div className={`node ${position}`}></div>
+  const {isStart, isEnd, isVisited} = props;
+  const className = `node ${isStart ? 'start' : ''} ${isEnd ? 'end' : ''} ${isVisited ? 'visited' : ''}`;
+
+  return <div className={className}></div>;
 }
