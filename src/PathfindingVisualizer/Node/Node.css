@@ -1,0 +1,6 @@
+.node {
+  width: 20px;  /* Width of the box */
+  height: 20px; /* Height of the box */
+  background-color: white; /* Color of the box */
+  border: 2px solid black; /* Border around the box */
+}
