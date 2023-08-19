@@ -1,17 +1,24 @@
 import {rows, cols} from '../PathfindingVisualizer/PathfindingVisualizer';
 
-export function dfs(grid, startNode, setGrid) {
+export function dfs(grid, startNode, setGrid, delay) {
   const stack = [grid[startNode[0]][startNode[1]]];
-  while (stack.length > 0) {
-    const node = stack.pop();
+  let i = 0;
+  const intervalId = setInterval(() => {
+    if (i >= stack.length) {
+      clearInterval(intervalId);
+      setGrid([...grid]);
+      return;
+    }
+    const node = stack[i];
     if (!node.isVisited) {
       node.isVisited = true;
       for (const neighbor of getNeighbors(grid, node)) {
         stack.push(neighbor);
       }
     }
-  }
-  setGrid([...grid])
+    i++;
+    setGrid([...grid]);
+  }, delay);
 }
 
 function getNeighbors(grid, node) {
