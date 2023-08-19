@@ -12,3 +12,7 @@
 .node.end {
   background-color: red; /* Color of the end node */
 }
+
+.node.visited {
+  background-color: blue;
+}
