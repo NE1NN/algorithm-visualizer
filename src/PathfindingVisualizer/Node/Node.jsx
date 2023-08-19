@@ -2,14 +2,13 @@ import './Node.css';
 
 export default function Node(props) {
   const {isStart, isEnd, isVisited} = props;
-  // const className = `node ${isStart ? 'start' : ''} ${isEnd ? 'end' : ''} ${isVisited ? 'visited' : ''}`;
-  let className = "node";
+  let className = "node ";
   if (isStart) {
-    className = "node start";
+    className += "start";
   } else if (isEnd) {
-    className = "node end";
+    className += "end";
   } else if (isVisited) {
-    className = "node visited";
+    className += "visited";
   }
 
   return <div className={className}></div>;
