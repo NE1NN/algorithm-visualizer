@@ -16,6 +16,7 @@ export default function PathfindingVisualizer() {
   // State to track the current node being visited
   const [currentNode, setCurrentNode] = useState(null);
 
+  // Creates initial grid
   const [grid, setGrid] = useState(() => {
     const initialGrid = [];
     for (let row = 0; row < rows; row++) {
@@ -27,20 +28,18 @@ export default function PathfindingVisualizer() {
       }
       initialGrid.push(currentRow);
     }
-    return initialGrid
+    return initialGrid;
   })
 
 
   return (
     // Creates a grid
     <div className='grid'>
-      {[...Array(rows)].map((_, rowIndex) => (
+      {grid.map((row, rowIndex) => (
         <div className='row' key={rowIndex}>
-        {[...Array(cols)].map((_, colIndex) => {
-          const isStart = rowIndex === startNode[0] && colIndex === startNode[1];
-          const isEnd = rowIndex === endNode[0]  && colIndex === endNode[1];
-          return <Node key={`${rowIndex}-${colIndex}`} isStart={isStart} isEnd={isEnd}/>
-        })}
+        {row.map(node => (
+          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd}/>
+        ))}
       </div>
       ))}
     </div>
