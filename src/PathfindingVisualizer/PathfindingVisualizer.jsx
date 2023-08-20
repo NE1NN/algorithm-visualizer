@@ -1,28 +1,46 @@
 import Node from './Node/Node';
+import { useState } from 'react';
+import { dfs } from '../Algorithms/dfs';
 
 import './PathfindingVisualizer.css'
+
+export const rows = 50;
+export const cols = 20;
  
 export default function PathfindingVisualizer() {
-  const rows = 50;
-  const cols = 20;
+  const startNode = [3, 16];
+  const endNode = [34, 2];
 
+  // Creates initial grid
+  const [grid, setGrid] = useState(() => {
+    const initialGrid = [];
+    for (let row = 0; row < rows; row++) {
+      const currentRow = []
+      for (let col = 0; col < cols; col++) {
+        const isStart = row === startNode[0] && col === startNode[1];
+        const isEnd = row === endNode[0] && col === endNode[1];
+        currentRow.push({row, col, isStart, isEnd, isVisited: false, isPath: false});
+      }
+      initialGrid.push(currentRow);
+    }
+    return initialGrid;
+  })
+
+  function handleClick() {
+    dfs(grid, startNode, endNode, setGrid, 10)
+  }
 
   return (
     // Creates a grid
     <div className='grid'>
-      {[...Array(rows)].map((_, rowIndex) => (
+      {grid.map((row, rowIndex) => (
         <div className='row' key={rowIndex}>
-        {[...Array(cols)].map((_, colIndex) => {
-          let position = '';
-          if (rowIndex === 3 && colIndex === 6) {
-            position = 'start';
-          } else if (rowIndex === 28 && colIndex === 6) {
-            position = 'end';
-          }
-          return <Node key={`${rowIndex}-${colIndex}`} position={position}/>
-        })}
+        {row.map(node => (
+          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited} isPath={node.isPath}/>
+        ))}
       </div>
       ))}
+      <button onClick={handleClick}>Start</button>
     </div>
   );
 }
