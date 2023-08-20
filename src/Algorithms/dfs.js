@@ -4,8 +4,8 @@ export function dfs(grid, startNode, endNode, setGrid, delay) {
   const stack = [grid[startNode[0]][startNode[1]]];
   let i = 0;
   const intervalId = setInterval(() => {
-    if (i >= stack.length) {
-      clearInterval(intervalId);
+    if (i >= stack.length) { 
+      clearInterval(intervalId); 
       setGrid([...grid]);
       return;
     }
@@ -19,7 +19,7 @@ export function dfs(grid, startNode, endNode, setGrid, delay) {
     }
     i++;
     setGrid([...grid]);
-    if (node === grid[endNode[0]][endNode[1]]) {
+    if (node === grid[endNode[0]][endNode[1]]) { /* End node found, trace back path */
       clearInterval(intervalId);
       const path = getPath(grid[endNode[0]][endNode[1]], delay);
       setGrid([...grid]);
@@ -42,16 +42,24 @@ export function dfs(grid, startNode, endNode, setGrid, delay) {
       setGrid([...grid]);
     }, delay);
     return path;
+  } 
+}
+
+function isNeighborNotWall(grid, row, col) {
+  if (row >= 0 && row < rows && col >= 0 && col < cols) {
+    return !grid[row][col].isWall
   }
-  
+
+  return false
 }
 
 function getNeighbors(grid, node) {
   const {row, col} = node;
   const neighbors = [];
-  if (row > 0) neighbors.push(grid[row - 1][col]);
-  if (row < rows - 1) neighbors.push(grid[row + 1][col]);
-  if (col > 0) neighbors.push(grid[row][col - 1]);
-  if (col < cols - 1) neighbors.push(grid[row][col + 1]);
+  console.log(neighbors);
+  if (isNeighborNotWall(grid, row - 1, col)) neighbors.push(grid[row - 1][col]);
+  if (isNeighborNotWall(grid, row + 1, col)) neighbors.push(grid[row + 1][col]);
+  if (isNeighborNotWall(grid, row, col - 1)) neighbors.push(grid[row][col - 1]);
+  if (isNeighborNotWall(grid, row, col + 1)) neighbors.push(grid[row][col + 1]);
   return neighbors.filter(neighbor => !neighbor.isVisited);
 }
