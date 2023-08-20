@@ -1,5 +1,5 @@
 import Node from './Node/Node';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { dfs } from '../Algorithms/dfs';
 
 import './PathfindingVisualizer.css'
