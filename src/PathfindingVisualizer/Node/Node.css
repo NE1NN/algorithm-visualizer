@@ -1,16 +1,16 @@
 .node {
-  width: 20px;  /* Width of the box */
-  height: 20px; /* Height of the box */
-  background-color: white; /* Color of the box */
-  border: 2px solid black; /* Border around the box */
+  width: 20px;  
+  height: 20px; 
+  background-color: white;
+  border: 2px solid black; 
 }
 
 .node.start {
-  background-color: green; /* Color of the start node */
+  background-color: green;
 }
 
 .node.end {
-  background-color: red; /* Color of the end node */
+  background-color: red; 
 }
 
 .node.visited {
