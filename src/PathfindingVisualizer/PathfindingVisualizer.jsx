@@ -1,6 +1,6 @@
 import Node from './Node/Node';
 import { useState } from 'react';
-import { dfs } from '../Algorithms/dfs';
+import Navbar from '../Components/Navbar';
 
 import './PathfindingVisualizer.css';
 
@@ -35,10 +35,6 @@ export default function PathfindingVisualizer() {
     return initialGrid;
   });
 
-  function handleButtonClick() {
-    dfs(grid, startNode, endNode, setGrid, 10);
-  }
-
   function toggleWall(row, col) {
     const node = grid[row][col];
     node.isWall = !node.isWall;
@@ -62,7 +58,12 @@ export default function PathfindingVisualizer() {
   return (
     // Creates a grid
     <div className="grid-container">
-      <button onClick={handleButtonClick}>Start</button>
+      <Navbar
+        grid={grid}
+        startNode={startNode}
+        endNode={endNode}
+        setGrid={setGrid}
+      ></Navbar>
       <div className="grid">
         {grid.map((row, rowIndex) => (
           <div className="row" key={rowIndex}>
