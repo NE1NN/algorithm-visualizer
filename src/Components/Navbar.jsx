@@ -1,11 +1,11 @@
 import './Navbar.css';
-import { dfs } from '../Algorithms/dfs';
+import { bfs } from '../Algorithms/bfs';
 
 export default function Navbar(props) {
   const { grid, startNode, endNode, setGrid } = props;
 
   function handleButtonClick() {
-    dfs(grid, startNode, endNode, setGrid, 30);
+    bfs(grid, startNode, endNode, setGrid, 30);
   }
 
   return (
