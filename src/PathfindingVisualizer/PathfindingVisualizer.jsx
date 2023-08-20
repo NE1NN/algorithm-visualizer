@@ -61,25 +61,27 @@ export default function PathfindingVisualizer() {
 
   return (
     // Creates a grid
-    <div className="grid">
-      {grid.map((row, rowIndex) => (
-        <div className="row" key={rowIndex}>
-          {row.map((node) => (
-            <Node
-              key={`${node.row}-${node.col}`}
-              isStart={node.isStart}
-              isEnd={node.isEnd}
-              isVisited={node.isVisited}
-              isPath={node.isPath}
-              isWall={node.isWall}
-              onMouseDown={() => handleNodeMouseDown(node.row, node.col)}
-              onMouseEnter={() => handleNodeMouseEnter(node.row, node.col)}
-              onMouseUp={handleNodeMouseUp}
-            />
-          ))}
-        </div>
-      ))}
+    <div className="grid-container">
       <button onClick={handleButtonClick}>Start</button>
+      <div className="grid">
+        {grid.map((row, rowIndex) => (
+          <div className="row" key={rowIndex}>
+            {row.map((node) => (
+              <Node
+                key={`${node.row}-${node.col}`}
+                isStart={node.isStart}
+                isEnd={node.isEnd}
+                isVisited={node.isVisited}
+                isPath={node.isPath}
+                isWall={node.isWall}
+                onMouseDown={() => handleNodeMouseDown(node.row, node.col)}
+                onMouseEnter={() => handleNodeMouseEnter(node.row, node.col)}
+                onMouseUp={handleNodeMouseUp}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
