@@ -1,9 +1,10 @@
-.App {
+/* .App {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   height: 100vh;           
-  /* background-color: blue; */
-  /* text-align: center; */
+  background-color: blue;
+  text-align: center;
+  margin: auto;
   justify-content: center;
-  /* align-items: center; */
-}
+  align-items: center;
+} */
