@@ -28,8 +28,14 @@ export default function PathfindingVisualizer() {
     return initialGrid;
   })
 
-  function handleClick() {
+  function handleButtonClick() {
     dfs(grid, startNode, endNode, setGrid, 10)
+  }
+
+  function handleNodeToWallClick(row, col) {
+    const node = grid[row][col];
+    node.isWall = !node.isWall;
+    setGrid([...grid]);
   }
 
   return (
@@ -38,11 +44,12 @@ export default function PathfindingVisualizer() {
       {grid.map((row, rowIndex) => (
         <div className='row' key={rowIndex}>
         {row.map(node => (
-          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited} isPath={node.isPath} isWall={node.isWall}/>
+          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited} isPath={node.isPath} isWall={node.isWall}
+          onClick={() => handleNodeToWallClick(node.row, node.col)}/>
         ))}
       </div>
       ))}
-      <button onClick={handleClick}>Start</button>
+      <button onClick={handleButtonClick}>Start</button>
     </div>
   );
 }
