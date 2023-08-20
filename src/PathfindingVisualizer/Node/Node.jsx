@@ -1,7 +1,7 @@
 import './Node.css';
 
 export default function Node(props) {
-  const {isStart, isEnd, isVisited, isPath, isWall} = props;
+  const {isStart, isEnd, isVisited, isPath, isWall, onClick} = props;
   let className = "node";
   if (isStart) {
     className = "node start";
@@ -15,5 +15,5 @@ export default function Node(props) {
     className = "node wall"
   }
 
-  return <div className={className}></div>;
+  return <div className={className} onClick={onClick}></div>;
 }
