@@ -1,6 +1,6 @@
 import Node from './Node/Node';
 import { useState } from 'react';
-import { dfs } from '../Algorithms/dfs';
+import Navbar from '../Components/Navbar';
 
 import './PathfindingVisualizer.css';
 
@@ -8,7 +8,7 @@ export const rows = 50;
 export const cols = 20;
 
 export default function PathfindingVisualizer() {
-  const startNode = [3, 16];
+  const startNode = [3, 2];
   const endNode = [34, 2];
   const [isHolding, setIsHolding] = useState(false);
 
@@ -35,10 +35,6 @@ export default function PathfindingVisualizer() {
     return initialGrid;
   });
 
-  function handleButtonClick() {
-    dfs(grid, startNode, endNode, setGrid, 10);
-  }
-
   function toggleWall(row, col) {
     const node = grid[row][col];
     node.isWall = !node.isWall;
@@ -61,25 +57,32 @@ export default function PathfindingVisualizer() {
 
   return (
     // Creates a grid
-    <div className="grid">
-      {grid.map((row, rowIndex) => (
-        <div className="row" key={rowIndex}>
-          {row.map((node) => (
-            <Node
-              key={`${node.row}-${node.col}`}
-              isStart={node.isStart}
-              isEnd={node.isEnd}
-              isVisited={node.isVisited}
-              isPath={node.isPath}
-              isWall={node.isWall}
-              onMouseDown={() => handleNodeMouseDown(node.row, node.col)}
-              onMouseEnter={() => handleNodeMouseEnter(node.row, node.col)}
-              onMouseUp={handleNodeMouseUp}
-            />
-          ))}
-        </div>
-      ))}
-      <button onClick={handleButtonClick}>Start</button>
+    <div className="grid-container">
+      <Navbar
+        grid={grid}
+        startNode={startNode}
+        endNode={endNode}
+        setGrid={setGrid}
+      ></Navbar>
+      <div className="grid">
+        {grid.map((row, rowIndex) => (
+          <div className="row" key={rowIndex}>
+            {row.map((node) => (
+              <Node
+                key={`${node.row}-${node.col}`}
+                isStart={node.isStart}
+                isEnd={node.isEnd}
+                isVisited={node.isVisited}
+                isPath={node.isPath}
+                isWall={node.isWall}
+                onMouseDown={() => handleNodeMouseDown(node.row, node.col)}
+                onMouseEnter={() => handleNodeMouseEnter(node.row, node.col)}
+                onMouseUp={handleNodeMouseUp}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import {rows, cols} from '../PathfindingVisualizer/PathfindingVisualizer';
 
-export function dfs(grid, startNode, endNode, setGrid, delay) {
+export function bfs(grid, startNode, endNode, setGrid, delay) {
   const stack = [grid[startNode[0]][startNode[1]]];
   let i = 0;
   const intervalId = setInterval(() => {
