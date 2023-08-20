@@ -10,7 +10,11 @@ export default function Navbar(props) {
 
   return (
     <nav className="navbar">
-      <button onClick={handleButtonClick}>Start</button>
+      <div>Path Finding Algorithm</div>
+      <button className="startButton" onClick={handleButtonClick}>
+        Start
+      </button>
+      <div>hello</div>
     </nav>
   );
 }
