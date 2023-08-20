@@ -8,8 +8,8 @@ export const rows = 50;
 export const cols = 20;
  
 export default function PathfindingVisualizer() {
-  const startNode = [3, 6];
-  const endNode = [28, 6];
+  const startNode = [3, 16];
+  const endNode = [34, 2];
 
   // Creates initial grid
   const [grid, setGrid] = useState(() => {
@@ -27,7 +27,7 @@ export default function PathfindingVisualizer() {
   })
 
   function handleClick() {
-    dfs(grid, startNode, endNode, setGrid)
+    dfs(grid, startNode, endNode, setGrid, 10)
   }
 
   return (
