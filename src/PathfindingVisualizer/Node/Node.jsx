@@ -1,19 +1,35 @@
 import './Node.css';
 
 export default function Node(props) {
-  const {isStart, isEnd, isVisited, isPath, isWall, onClick} = props;
-  let className = "node";
+  const {
+    isStart,
+    isEnd,
+    isVisited,
+    isPath,
+    isWall,
+    onMouseDown,
+    onMouseEnter,
+    onMouseUp,
+  } = props;
+  let className = 'node';
   if (isStart) {
-    className = "node start";
+    className = 'node start';
   } else if (isEnd) {
-    className = "node end";
+    className = 'node end';
   } else if (isPath) {
-      className = "node path"
+    className = 'node path';
   } else if (isVisited) {
-    className = "node visited";
+    className = 'node visited';
   } else if (isWall) {
-    className = "node wall"
+    className = 'node wall';
   }
 
-  return <div className={className} onClick={onClick}></div>;
+  return (
+    <div
+      className={className}
+      onMouseDown={onMouseDown}
+      onMouseEnter={onMouseEnter}
+      onMouseUp={onMouseUp}
+    ></div>
+  );
 }
