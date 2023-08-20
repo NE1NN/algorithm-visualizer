@@ -19,15 +19,21 @@ export default function PathfindingVisualizer() {
       for (let col = 0; col < cols; col++) {
         const isStart = row === startNode[0] && col === startNode[1];
         const isEnd = row === endNode[0] && col === endNode[1];
-        currentRow.push({row, col, isStart, isEnd, isVisited: false, isPath: false});
+        currentRow.push({row, col, isStart, isEnd, isVisited: false, isPath: false, isWall: false});
       }
       initialGrid.push(currentRow);
     }
     return initialGrid;
   })
 
-  function handleClick() {
+  function handleButtonClick() {
     dfs(grid, startNode, endNode, setGrid, 10)
+  }
+
+  function handleNodeToWallClick(row, col) {
+    const node = grid[row][col];
+    node.isWall = !node.isWall;
+    setGrid([...grid]);
   }
 
   return (
@@ -36,11 +42,12 @@ export default function PathfindingVisualizer() {
       {grid.map((row, rowIndex) => (
         <div className='row' key={rowIndex}>
         {row.map(node => (
-          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited} isPath={node.isPath}/>
+          <Node key={`${node.row}-${node.col}`} isStart={node.isStart} isEnd={node.isEnd} isVisited={node.isVisited} isPath={node.isPath} isWall={node.isWall}
+          onClick={() => handleNodeToWallClick(node.row, node.col)}/>
         ))}
       </div>
       ))}
-      <button onClick={handleClick}>Start</button>
+      <button onClick={handleButtonClick}>Start</button>
     </div>
   );
 }
