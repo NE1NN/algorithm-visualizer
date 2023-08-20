@@ -5,7 +5,7 @@ export default function Navbar(props) {
   const { grid, startNode, endNode, setGrid } = props;
 
   function handleButtonClick() {
-    bfs(grid, startNode, endNode, setGrid, 30);
+    bfs(grid, startNode, endNode, setGrid, 10);
   }
 
   return (
