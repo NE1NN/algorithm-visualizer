@@ -8,7 +8,7 @@ export const rows = 50;
 export const cols = 20;
 
 export default function PathfindingVisualizer() {
-  const startNode = [3, 16];
+  const startNode = [3, 2];
   const endNode = [34, 2];
   const [isHolding, setIsHolding] = useState(false);
 
