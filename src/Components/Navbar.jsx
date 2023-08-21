@@ -11,7 +11,7 @@ export default function Navbar(props) {
   const [algorithm, setAlgorithm] = useState('BFS');
 
   function handleButtonClick() {
-    clearGrid();
+    clearPath();
     if (algorithm === 'BFS') {
       bfs(grid, startNode, endNode, setGrid, speed);
     } else {
@@ -38,7 +38,7 @@ export default function Navbar(props) {
     else setAlgorithm('DFS');
   }
 
-  function clearGrid() {
+  function clearPath() {
     setGrid((prevGrid) => {
       const newGrid = prevGrid.map((row) =>
         row.map((node) => {
@@ -69,7 +69,9 @@ export default function Navbar(props) {
       <button className="startButton" onClick={handleButtonClick}>
         Start
       </button>
-      ;
+      <button className="otherButton" onClick={clearPath}>
+        Clear Path
+      </button>
     </nav>
   );
 }

@@ -2,6 +2,10 @@ body, html {
   height: 100vh;
 }
 
+* {
+  font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+
 .grid-container {
   display: flex;
   flex-direction: column;
@@ -24,8 +28,8 @@ body, html {
 }
 
 .navbar > * {
-  margin-right: 30px;
-  margin-left: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
   font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
   font-size: 14px;
   color: #fff;
