@@ -1,20 +1,20 @@
 import {rows, cols} from '../PathfindingVisualizer/PathfindingVisualizer';
 
 export function bfs(grid, startNode, endNode, setGrid, delay) {
-  const stack = [grid[startNode[0]][startNode[1]]];
+  const queue = [grid[startNode[0]][startNode[1]]];
   let i = 0;
   const intervalId = setInterval(() => {
-    if (i >= stack.length) { 
+    if (i >= queue.length) { 
       clearInterval(intervalId); 
       setGrid([...grid]);
       return;
     }
-    const node = stack[i];
+    const node = queue[i];
     if (!node.isVisited) {
       node.isVisited = true;
       for (const neighbor of getNeighbors(grid, node)) {
         neighbor.previousNode = node;
-        stack.push(neighbor);
+        queue.push(neighbor);
       }
     }
     i++;

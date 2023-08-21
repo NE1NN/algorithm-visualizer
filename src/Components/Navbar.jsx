@@ -1,21 +1,48 @@
 import './Navbar.css';
 import { bfs } from '../Algorithms/bfs';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import { useState } from 'react';
 
 export default function Navbar(props) {
   const { grid, startNode, endNode, setGrid } = props;
+  const [speed, setSpeed] = useState(10);
 
   function handleButtonClick() {
-    bfs(grid, startNode, endNode, setGrid, 10);
+    bfs(grid, startNode, endNode, setGrid, speed);
+  }
+
+  const algorithmOptions = ['BFS', 'DFS'];
+  const defaultAlgoOption = algorithmOptions[0];
+
+  const speedOptions = ['Fast', 'Medium', 'Slow'];
+  const defaultSpeedOption = speedOptions[0];
+
+  function changeSpeed(selectedOption) {
+    const speed = selectedOption.value;
+    if (speed === 'Fast') setSpeed(10);
+    else if (speed === 'Medium') setSpeed(20);
+    else if (speed === 'Slow') setSpeed(30);
   }
 
   return (
     <nav className="navbar">
       <div id="title">Path Finding Algorithm</div>
-      <div>BFS</div>
-      <div>Speed: Fast</div>
+      <Dropdown
+        options={algorithmOptions}
+        value={defaultAlgoOption}
+        placeholder="Select an option"
+      />
+      <Dropdown
+        options={speedOptions}
+        value={defaultSpeedOption}
+        placeholder="Select an option"
+        onChange={changeSpeed}
+      />
       <button className="startButton" onClick={handleButtonClick}>
         Start
       </button>
+      ;
     </nav>
   );
 }
