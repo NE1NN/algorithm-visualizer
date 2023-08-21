@@ -8,8 +8,12 @@ export const rows = 50;
 export const cols = 20;
 
 export default function PathfindingVisualizer() {
-  const startNode = [3, 2];
-  const endNode = [34, 2];
+  // const startNode = [3, 2];
+  // const endNode = [34, 2];
+  const [startNode, setStartNode] = useState([3, 2]);
+  const [endNode, setEndNode] = useState([34, 2]);
+  const [isChangingStart, setIsChangingStart] = useState(false);
+
   const [isHolding, setIsHolding] = useState(false);
 
   // Creates initial grid
@@ -41,18 +45,52 @@ export default function PathfindingVisualizer() {
     setGrid([...grid]);
   }
 
+  function removeStartNode(row, col) {
+    const node = grid[row][col];
+    node.isStart = false;
+    setIsChangingStart(true);
+    setGrid([...grid]);
+  }
+
+  function newStartNode(row, col) {
+    const node = grid[row][col];
+    node.isStart = true;
+    setStartNode([row, col]);
+    setGrid([...grid]);
+  }
+
   function handleNodeMouseDown(row, col) {
     setIsHolding(true);
-    toggleWall(row, col);
+    const node = grid[row][col];
+    if (node.isStart) {
+      removeStartNode(row, col);
+    } else {
+      toggleWall(row, col);
+    }
   }
 
   function handleNodeMouseEnter(row, col) {
     if (!isHolding) return;
-    toggleWall(row, col);
+    if (isChangingStart) {
+      newStartNode(row, col);
+    } else {
+      toggleWall(row, col);
+    }
   }
 
-  function handleNodeMouseUp() {
+  function handleNodeMouseLeave(row, col) {
+    const node = grid[row][col];
+    if (isChangingStart) {
+      node.isStart = false;
+    }
+  }
+
+  function handleNodeMouseUp(row, col) {
     setIsHolding(false);
+    if (isChangingStart) {
+      newStartNode(row, col);
+      setIsChangingStart(false);
+    }
   }
 
   return (
@@ -77,7 +115,8 @@ export default function PathfindingVisualizer() {
                 isWall={node.isWall}
                 onMouseDown={() => handleNodeMouseDown(node.row, node.col)}
                 onMouseEnter={() => handleNodeMouseEnter(node.row, node.col)}
-                onMouseUp={handleNodeMouseUp}
+                onMouseLeave={() => handleNodeMouseLeave(node.row, node.col)}
+                onMouseUp={() => handleNodeMouseUp(node.row, node.col)}
               />
             ))}
           </div>

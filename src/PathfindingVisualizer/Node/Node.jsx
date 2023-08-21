@@ -9,6 +9,7 @@ export default function Node(props) {
     isWall,
     onMouseDown,
     onMouseEnter,
+    onMouseLeave,
     onMouseUp,
   } = props;
   let className = 'node';
@@ -29,6 +30,7 @@ export default function Node(props) {
       className={className}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       onMouseUp={onMouseUp}
     ></div>
   );
