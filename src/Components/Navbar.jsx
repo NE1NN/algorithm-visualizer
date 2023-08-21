@@ -9,6 +9,7 @@ export default function Navbar(props) {
   const [speed, setSpeed] = useState(10);
 
   function handleButtonClick() {
+    clearGrid();
     bfs(grid, startNode, endNode, setGrid, speed);
   }
 
@@ -23,6 +24,19 @@ export default function Navbar(props) {
     if (speed === 'Fast') setSpeed(10);
     else if (speed === 'Medium') setSpeed(20);
     else if (speed === 'Slow') setSpeed(30);
+  }
+
+  function clearGrid() {
+    setGrid((prevGrid) => {
+      const newGrid = prevGrid.map((row) =>
+        row.map((node) => {
+          node.isVisited = false;
+          node.isPath = false;
+          return node;
+        })
+      );
+      return newGrid;
+    });
   }
 
   return (
