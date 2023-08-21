@@ -8,12 +8,10 @@ export const rows = 50;
 export const cols = 20;
 
 export default function PathfindingVisualizer() {
-  // const startNode = [3, 2];
-  // const endNode = [34, 2];
   const [startNode, setStartNode] = useState([3, 2]);
   const [endNode, setEndNode] = useState([34, 2]);
   const [isChangingStart, setIsChangingStart] = useState(false);
-
+  const [isChangingEnd, setIsChangingEnd] = useState(false);
   const [isHolding, setIsHolding] = useState(false);
 
   // Creates initial grid
@@ -45,6 +43,20 @@ export default function PathfindingVisualizer() {
     setGrid([...grid]);
   }
 
+  function newStartNode(row, col) {
+    const node = grid[row][col];
+    node.isStart = true;
+    setStartNode([row, col]);
+    setGrid([...grid]);
+  }
+
+  function newEndNode(row, col) {
+    const node = grid[row][col];
+    node.isEnd = true;
+    setEndNode([row, col]);
+    setGrid([...grid]);
+  }
+
   function removeStartNode(row, col) {
     const node = grid[row][col];
     node.isStart = false;
@@ -52,10 +64,10 @@ export default function PathfindingVisualizer() {
     setGrid([...grid]);
   }
 
-  function newStartNode(row, col) {
+  function removeEndNode(row, col) {
     const node = grid[row][col];
-    node.isStart = true;
-    setStartNode([row, col]);
+    node.isEnd = false;
+    setIsChangingEnd(true);
     setGrid([...grid]);
   }
 
@@ -64,6 +76,8 @@ export default function PathfindingVisualizer() {
     const node = grid[row][col];
     if (node.isStart) {
       removeStartNode(row, col);
+    } else if (node.isEnd) {
+      removeEndNode(row, col);
     } else {
       toggleWall(row, col);
     }
@@ -73,6 +87,8 @@ export default function PathfindingVisualizer() {
     if (!isHolding) return;
     if (isChangingStart) {
       newStartNode(row, col);
+    } else if (isChangingEnd) {
+      newEndNode(row, col);
     } else {
       toggleWall(row, col);
     }
@@ -82,6 +98,8 @@ export default function PathfindingVisualizer() {
     const node = grid[row][col];
     if (isChangingStart) {
       node.isStart = false;
+    } else if (isChangingEnd) {
+      node.isEnd = false;
     }
   }
 
@@ -90,6 +108,9 @@ export default function PathfindingVisualizer() {
     if (isChangingStart) {
       newStartNode(row, col);
       setIsChangingStart(false);
+    } else if (isChangingEnd) {
+      newEndNode(row, col);
+      setIsChangingEnd(false);
     }
   }
 
