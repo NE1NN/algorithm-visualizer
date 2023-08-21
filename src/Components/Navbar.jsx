@@ -51,6 +51,20 @@ export default function Navbar(props) {
     });
   }
 
+  function clearGrid() {
+    setGrid((prevGrid) => {
+      const newGrid = prevGrid.map((row) =>
+        row.map((node) => {
+          node.isVisited = false;
+          node.isPath = false;
+          node.isWall = false;
+          return node;
+        })
+      );
+      return newGrid;
+    });
+  }
+
   return (
     <nav className="navbar">
       <div id="title">Path Finding Algorithm</div>
@@ -59,18 +73,23 @@ export default function Navbar(props) {
         value={defaultAlgoOption}
         placeholder="Select an option"
         onChange={changeAlgorithm}
+        className="dropdown"
       />
       <Dropdown
         options={speedOptions}
         value={defaultSpeedOption}
         placeholder="Select an option"
         onChange={changeSpeed}
+        className="dropdown"
       />
       <button className="startButton" onClick={handleButtonClick}>
         Start
       </button>
       <button className="otherButton" onClick={clearPath}>
         Clear Path
+      </button>
+      <button className="otherButton" onClick={clearGrid}>
+        Clear Grid
       </button>
     </nav>
   );
