@@ -68,23 +68,6 @@ export default function Navbar(props) {
     });
   }
 
-  function generateRandomMaze() {
-    const newGrid = [...grid];
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const isStart = row === startNode[0] && col === startNode[1];
-        const isEnd = row === endNode[0] && col === endNode[1];
-
-        if (!isStart && !isEnd && Math.random() < 0.3) {
-          newGrid[row][col].isWall = true;
-        } else {
-          newGrid[row][col].isWall = false;
-        }
-      }
-    }
-    setGrid(newGrid);
-  }
-
   function generateStructuredMaze() {
     const newGrid = Array.from({ length: rows }, (_, rowIndex) =>
       Array.from({ length: cols }, (_, colIndex) => ({
