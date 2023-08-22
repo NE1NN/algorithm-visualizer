@@ -4,6 +4,7 @@ import { bfs } from '../Algorithms/bfs';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { useState } from 'react';
+import { rows, cols } from '../PathfindingVisualizer/PathfindingVisualizer';
 
 export default function Navbar(props) {
   const { grid, startNode, endNode, setGrid } = props;
@@ -67,6 +68,23 @@ export default function Navbar(props) {
     });
   }
 
+  function generateRandomMaze() {
+    const newGrid = [...grid];
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const isStart = row === startNode[0] && col === startNode[1];
+        const isEnd = row === endNode[0] && col === endNode[1];
+
+        if (!isStart && !isEnd && Math.random() < 0.3) {
+          newGrid[row][col].isWall = true;
+        } else {
+          newGrid[row][col].isWall = false;
+        }
+      }
+    }
+    setGrid(newGrid);
+  }
+
   return (
     <nav className="navbar">
       <div id="title">Path Finding Algorithm</div>
@@ -92,6 +110,9 @@ export default function Navbar(props) {
       </button>
       <button className="otherButton" onClick={clearGrid}>
         Clear Grid
+      </button>
+      <button className="otherButton" onClick={generateRandomMaze}>
+        Generate Maze
       </button>
     </nav>
   );
