@@ -148,7 +148,13 @@ export default function Navbar(props) {
       <button className="otherButton" onClick={clearGrid}>
         Clear Grid
       </button>
-      <button className="otherButton" onClick={generateStructuredMaze}>
+      <button
+        className="otherButton"
+        onClick={() => {
+          generateStructuredMaze();
+          clearPath();
+        }}
+      >
         Generate Maze
       </button>
     </nav>
