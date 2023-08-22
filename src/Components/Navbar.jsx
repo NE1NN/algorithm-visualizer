@@ -44,6 +44,7 @@ export default function Navbar(props) {
         row.map((node) => {
           node.isVisited = false;
           node.isPath = false;
+          node.previousNode = undefined;
           return node;
         })
       );
@@ -58,6 +59,7 @@ export default function Navbar(props) {
           node.isVisited = false;
           node.isPath = false;
           node.isWall = false;
+          node.previousNode = undefined;
           return node;
         })
       );
