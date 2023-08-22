@@ -38,37 +38,42 @@ export default function PathfindingVisualizer() {
   });
 
   function toggleWall(row, col) {
-    const node = grid[row][col];
+    const newGrid = [...grid];
+    const node = newGrid[row][col];
     node.isWall = !node.isWall;
-    setGrid([...grid]);
+    setGrid([...newGrid]);
   }
 
   function newStartNode(row, col) {
-    const node = grid[row][col];
+    const newGrid = [...grid];
+    const node = newGrid[row][col];
     node.isStart = true;
     setStartNode([row, col]);
-    setGrid([...grid]);
+    setGrid([...newGrid]);
   }
 
   function newEndNode(row, col) {
-    const node = grid[row][col];
+    const newGrid = [...grid];
+    const node = newGrid[row][col];
     node.isEnd = true;
     setEndNode([row, col]);
-    setGrid([...grid]);
+    setGrid([...newGrid]);
   }
 
   function removeStartNode(row, col) {
-    const node = grid[row][col];
+    const newGrid = [...grid];
+    const node = newGrid[row][col];
     node.isStart = false;
     setIsChangingStart(true);
-    setGrid([...grid]);
+    setGrid([...newGrid]);
   }
 
   function removeEndNode(row, col) {
-    const node = grid[row][col];
+    const newGrid = [...grid];
+    const node = newGrid[row][col];
     node.isEnd = false;
     setIsChangingEnd(true);
-    setGrid([...grid]);
+    setGrid([...newGrid]);
   }
 
   function handleNodeMouseDown(row, col) {

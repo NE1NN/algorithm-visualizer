@@ -1,28 +1,30 @@
 import {rows, cols} from '../PathfindingVisualizer/PathfindingVisualizer';
 
 export function bfs(grid, startNode, endNode, setGrid, delay) {
-  const queue = [grid[startNode[0]][startNode[1]]];
+  const newGrid = [...grid];
+  const queue = [newGrid[startNode[0]][startNode[1]]];
   let i = 0;
   const intervalId = setInterval(() => {
     if (i >= queue.length) { 
       clearInterval(intervalId); 
-      setGrid([...grid]);
+      setGrid([...newGrid]);
       return;
     }
     const node = queue[i];
     if (!node.isVisited) {
       node.isVisited = true;
-      for (const neighbor of getNeighbors(grid, node)) {
+      // newGrid[node.row][node.col].isVisited = true;
+      for (const neighbor of getNeighbors(newGrid, node)) {
         neighbor.previousNode = node;
         queue.push(neighbor);
       }
     }
     i++;
-    setGrid([...grid]);
-    if (node === grid[endNode[0]][endNode[1]]) { /* End node found, trace back path */
+    setGrid([...newGrid]);
+    if (node === newGrid[endNode[0]][endNode[1]]) { /* End node found, trace back path */
       clearInterval(intervalId);
-      const path = getPath(grid[endNode[0]][endNode[1]], delay);
-      setGrid([...grid]);
+      const path = getPath(newGrid[endNode[0]][endNode[1]], delay);
+      setGrid([...newGrid]);
       return path;
     }
   }, delay);
@@ -39,7 +41,7 @@ export function bfs(grid, startNode, endNode, setGrid, delay) {
         path.unshift(currentNode);
         clearInterval(intervalId);
       }
-      setGrid([...grid]);
+      setGrid([...newGrid]);
     }, delay);
     return path;
   } 
