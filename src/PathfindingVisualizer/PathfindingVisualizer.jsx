@@ -1,6 +1,7 @@
 import Node from './Node/Node';
 import { useState } from 'react';
 import Navbar from '../Components/Navbar';
+import InfoBar from '../Components/InfoBar';
 
 import './PathfindingVisualizer.css';
 
@@ -123,6 +124,7 @@ export default function PathfindingVisualizer() {
         endNode={endNode}
         setGrid={setGrid}
       ></Navbar>
+      <InfoBar></InfoBar>
       <div className="grid">
         {grid.map((row, rowIndex) => (
           <div className="row" key={rowIndex}>
