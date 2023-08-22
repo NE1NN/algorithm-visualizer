@@ -48,7 +48,7 @@ export default function PathfindingVisualizer() {
       disableBeacon: true,
     },
     {
-      target: '.node',
+      target: '.grid',
       content: 'Click on the node to draw walls',
       placement: 'bottom',
       disableBeacon: true,
