@@ -4,6 +4,7 @@ import { bfs } from '../Algorithms/bfs';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { useState } from 'react';
+import { rows, cols } from '../PathfindingVisualizer/PathfindingVisualizer';
 
 export default function Navbar(props) {
   const { grid, startNode, endNode, setGrid } = props;
@@ -39,30 +40,28 @@ export default function Navbar(props) {
   }
 
   function clearPath() {
-    setGrid((prevGrid) => {
-      const newGrid = prevGrid.map((row) =>
-        row.map((node) => {
-          node.isVisited = false;
-          node.isPath = false;
-          return node;
-        })
-      );
-      return newGrid;
-    });
+    const newGrid = [...grid];
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        newGrid[row][col].isVisited = false;
+        newGrid[row][col].isPath = false;
+        newGrid[row][col].previousNode = undefined;
+      }
+    }
+    setGrid([...newGrid]);
   }
 
   function clearGrid() {
-    setGrid((prevGrid) => {
-      const newGrid = prevGrid.map((row) =>
-        row.map((node) => {
-          node.isVisited = false;
-          node.isPath = false;
-          node.isWall = false;
-          return node;
-        })
-      );
-      return newGrid;
-    });
+    const newGrid = [...grid];
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        newGrid[row][col].isVisited = false;
+        newGrid[row][col].isPath = false;
+        newGrid[row][col].isWall = false;
+        newGrid[row][col].previousNode = undefined;
+      }
+    }
+    setGrid([...newGrid]);
   }
 
   return (
