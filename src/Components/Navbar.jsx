@@ -88,12 +88,6 @@ export default function Navbar(props) {
       <button className="startButton" onClick={handleButtonClick}>
         Start
       </button>
-      <button className="otherButton" onClick={clearPath}>
-        Clear Path
-      </button>
-      <button className="otherButton" onClick={clearGrid}>
-        Clear Grid
-      </button>
       <button
         className="otherButton"
         onClick={() => {
@@ -102,6 +96,12 @@ export default function Navbar(props) {
         }}
       >
         Generate Maze
+      </button>
+      <button className="otherButton" onClick={clearPath}>
+        Clear Path
+      </button>
+      <button className="otherButton" onClick={clearGrid}>
+        Clear Grid
       </button>
     </nav>
   );
