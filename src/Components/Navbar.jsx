@@ -7,9 +7,8 @@ import { useState } from 'react';
 import { generateStructuredMaze } from '../Algorithms/generateMaze';
 
 export default function Navbar(props) {
-  const { grid, startNode, endNode, setGrid } = props;
+  const { grid, startNode, endNode, setGrid, algorithm, setAlgorithm } = props;
   const [speed, setSpeed] = useState(10);
-  const [algorithm, setAlgorithm] = useState('BFS');
 
   function handleButtonClick() {
     clearPath();

@@ -1,8 +1,10 @@
 import Node from './Node/Node';
 import { useState } from 'react';
 import Navbar from '../Components/Navbar';
+import InfoBar from '../Components/InfoBar';
 
 import './PathfindingVisualizer.css';
+import AlgorithmInfo from '../Components/AlgorithmInfo';
 
 export const rows = 50;
 export const cols = 20;
@@ -13,6 +15,7 @@ export default function PathfindingVisualizer() {
   const [isChangingStart, setIsChangingStart] = useState(false);
   const [isChangingEnd, setIsChangingEnd] = useState(false);
   const [isHolding, setIsHolding] = useState(false);
+  const [algorithm, setAlgorithm] = useState('BFS');
 
   // Creates initial grid
   const [grid, setGrid] = useState(() => {
@@ -122,7 +125,11 @@ export default function PathfindingVisualizer() {
         startNode={startNode}
         endNode={endNode}
         setGrid={setGrid}
+        algorithm={algorithm}
+        setAlgorithm={setAlgorithm}
       ></Navbar>
+      <InfoBar></InfoBar>
+      <AlgorithmInfo algorithm={algorithm}></AlgorithmInfo>
       <div className="grid">
         {grid.map((row, rowIndex) => (
           <div className="row" key={rowIndex}>
