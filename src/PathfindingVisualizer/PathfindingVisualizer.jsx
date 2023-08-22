@@ -4,8 +4,8 @@ import Navbar from '../Components/Navbar';
 
 import './PathfindingVisualizer.css';
 
-export const rows = 50;
-export const cols = 20;
+export const rows = 64;
+export const cols = 26;
 
 export default function PathfindingVisualizer() {
   const [startNode, setStartNode] = useState([3, 2]);
