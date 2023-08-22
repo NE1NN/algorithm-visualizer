@@ -2,9 +2,9 @@ import Node from './Node/Node';
 import { useState } from 'react';
 import Navbar from '../Components/Navbar';
 import InfoBar from '../Components/InfoBar';
-
 import './PathfindingVisualizer.css';
 import AlgorithmInfo from '../Components/AlgorithmInfo';
+import Joyride from 'react-joyride';
 
 export const rows = 50;
 export const cols = 20;
@@ -39,6 +39,21 @@ export default function PathfindingVisualizer() {
     }
     return initialGrid;
   });
+
+  const tourSteps = [
+    {
+      target: '.node.start',
+      content: 'Drag to move the starting node and end node',
+      placement: 'bottom',
+      disableBeacon: true,
+    },
+    {
+      target: '.grid',
+      content: 'Click on the node to draw walls',
+      placement: 'bottom',
+      disableBeacon: true,
+    },
+  ];
 
   function toggleWall(row, col) {
     const node = grid[row][col];
@@ -150,6 +165,12 @@ export default function PathfindingVisualizer() {
           </div>
         ))}
       </div>
+      <Joyride
+        steps={tourSteps}
+        showProgress={true}
+        showSkipButton={true}
+        continuous={true}
+      ></Joyride>
     </div>
   );
 }
