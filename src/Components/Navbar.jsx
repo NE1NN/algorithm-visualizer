@@ -9,14 +9,17 @@ import { generateStructuredMaze } from '../Algorithms/generateMaze';
 export default function Navbar(props) {
   const { grid, startNode, endNode, setGrid, algorithm, setAlgorithm } = props;
   const [speed, setSpeed] = useState(10);
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  function handleButtonClick() {
+  async function handleButtonClick() {
     clearPath();
+    setIsDisabled(true);
     if (algorithm === 'BFS') {
-      bfs(grid, startNode, endNode, setGrid, speed);
+      await bfs(grid, startNode, endNode, setGrid, speed);
     } else {
-      dfs(grid, startNode, endNode, setGrid, speed);
+      await dfs(grid, startNode, endNode, setGrid, speed);
     }
+    setIsDisabled(false);
   }
 
   const algorithmOptions = ['BFS', 'DFS'];
@@ -84,7 +87,11 @@ export default function Navbar(props) {
         onChange={changeSpeed}
         className="dropdown"
       />
-      <button className="startButton" onClick={handleButtonClick}>
+      <button
+        className="startButton"
+        onClick={handleButtonClick}
+        disabled={isDisabled}
+      >
         Start
       </button>
       <button

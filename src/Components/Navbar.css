@@ -45,6 +45,11 @@
   box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
 }
 
+.startButton:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 .otherButton {
   background-color: transparent;
   box-shadow: none;
