@@ -96,6 +96,7 @@ export default function Navbar(props) {
       </button>
       <button
         className="otherButton"
+        disabled={isDisabled}
         onClick={() => {
           generateStructuredMaze(startNode, endNode, setGrid);
           clearPath();
@@ -103,10 +104,10 @@ export default function Navbar(props) {
       >
         Generate Maze
       </button>
-      <button className="otherButton" onClick={clearPath}>
+      <button className="otherButton" onClick={clearPath} disabled={isDisabled}>
         Clear Path
       </button>
-      <button className="otherButton" onClick={clearGrid}>
+      <button className="otherButton" onClick={clearGrid} disabled={isDisabled}>
         Clear Grid
       </button>
     </nav>
