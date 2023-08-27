@@ -1,46 +1,50 @@
 import {rows, cols} from '../PathfindingVisualizer/PathfindingVisualizer';
 
 export function dfs(grid, startNode, endNode, setGrid, delay) {
-  const stack = [grid[startNode[0]][startNode[1]]];
-  const intervalId = setInterval(() => {
-    if (!stack.length) { 
-      clearInterval(intervalId); 
-      setGrid([...grid]);
-      return;
-    }
-    const node = stack.pop();
-    if (!node.isVisited) {
-      node.isVisited = true;
-      for (const neighbor of getNeighbors(grid, node)) {
-        neighbor.previousNode = node;
-        stack.push(neighbor);
+  return new Promise((resolve, reject) => {
+    const stack = [grid[startNode[0]][startNode[1]]];
+    const intervalId = setInterval(() => {
+      if (!stack.length) { 
+        clearInterval(intervalId); 
+        setGrid([...grid]);
+        return;
       }
-    }
-    setGrid([...grid]);
-    if (node === grid[endNode[0]][endNode[1]]) { /* End node found, trace back path */
-      clearInterval(intervalId);
-      const path = getPath(grid[endNode[0]][endNode[1]], delay);
+      const node = stack.pop();
+      if (!node.isVisited) {
+        node.isVisited = true;
+        for (const neighbor of getNeighbors(grid, node)) {
+          neighbor.previousNode = node;
+          stack.push(neighbor);
+        }
+      }
       setGrid([...grid]);
+      if (node === grid[endNode[0]][endNode[1]]) { /* End node found, trace back path */
+        clearInterval(intervalId);
+        const path = getPath(grid[endNode[0]][endNode[1]], delay);
+        setGrid([...grid]);
+        resolve(path)
+        return;
+      }
+    }, delay);
+
+    function getPath(endNode, delay) {
+      const path = [];
+      let currentNode = endNode;
+      const intervalId = setInterval(() => {
+        if (currentNode.previousNode) {
+          currentNode.isPath = true;
+          path.unshift(currentNode);
+          currentNode = currentNode.previousNode;
+        } else {
+          path.unshift(currentNode);
+          clearInterval(intervalId);
+          resolve(path)
+        }
+        setGrid([...grid]);
+      }, delay);
       return path;
     }
-  }, delay);
-
-  function getPath(endNode, delay) {
-    const path = [];
-    let currentNode = endNode;
-    const intervalId = setInterval(() => {
-      if (currentNode.previousNode) {
-        currentNode.isPath = true;
-        path.unshift(currentNode);
-        currentNode = currentNode.previousNode;
-      } else {
-        path.unshift(currentNode);
-        clearInterval(intervalId);
-      }
-      setGrid([...grid]);
-    }, delay);
-    return path;
-  } 
+  });
 }
 
 function isNeighborNotWall(grid, row, col) {
